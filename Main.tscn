@@ -139,6 +139,14 @@ value = 100.0
 rounded = true
 show_percentage = false
 
+[node name="PanelContainer" type="PanelContainer" parent="MultiplayerUI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn", "res://pistol.tscn")
 spawn_path = NodePath("..")
