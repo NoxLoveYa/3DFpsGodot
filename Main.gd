@@ -6,6 +6,8 @@ extends Node3D
 @onready var healthBar = $"MultiplayerUI/HUD/HealthBar"
 @onready var hitmarker = $"MultiplayerUI/HUD/Hitmarker"
 @onready var map = $Map
+@onready var crosshair = $"MultiplayerUI/HUD/Crosshair"
+@onready var scope = $"MultiplayerUI/HUD/Scope"
 var Player = preload("res://Player.tscn")
 
 const PORT = 3000
@@ -45,6 +47,7 @@ func add_player(id):
 	if new_player.is_multiplayer_authority():
 		new_player.connect("healthChanged", update_health_bar)
 		new_player.connect("damaged", on_damaged)
+		new_player.connect("scoped", on_scoped)
 
 func remove_player(id):
 	var plr = get_node_or_null(str(id))
@@ -68,10 +71,19 @@ func on_damaged():
 	await t.timeout
 	hitmarker.hide()
 
+func on_scoped(state):
+	if state:
+		scope.show()
+		crosshair.hide()
+	else:
+		scope.hide()
+		crosshair.show()
+
 func _on_multiplayer_spawner_spawned(new_player):
 	if new_player.is_multiplayer_authority():
 		new_player.connect("healthChanged", update_health_bar)
 		new_player.connect("damaged", on_damaged)
+		new_player.connect("scoped", on_scoped)
 
 func get_random_spawn_point():
 	return map.get_node(str("Spawns/SpawnPoint", randi_range(1, map.get_node("Spawns").get_child_count())))

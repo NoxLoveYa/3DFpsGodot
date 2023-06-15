@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://kiqqev4oayf8"]
+[gd_scene load_steps=11 format=3 uid="uid://kiqqev4oayf8"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_rvob1"]
 [ext_resource type="PackedScene" uid="uid://b0p74shck0gqo" path="res://Map.tscn" id="2_r2c0u"]
 [ext_resource type="Texture2D" uid="uid://urc7358so6ky" path="res://addons/kenney_particle_pack/circle_05.png" id="4_e2dtj"]
 [ext_resource type="Texture2D" uid="uid://cskhdpoknkmqp" path="res://addons/kenney_particle_pack/magic_03.png" id="5_7x6vg"]
+[ext_resource type="Texture2D" uid="uid://ckx2o5avo5b1j" path="res://textures/scope.png" id="5_i1ear"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x5ejt"]
 ground_bottom_color = Color(0, 0, 0, 1)
@@ -139,13 +140,57 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="PanelContainer" type="PanelContainer" parent="MultiplayerUI"]
+[node name="Scope" type="TextureRect" parent="MultiplayerUI/HUD"]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_i1ear")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="InGameMenu" type="PanelContainer" parent="MultiplayerUI"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MultiplayerUI/InGameMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerUI/InGameMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MultiplayerUI/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="MultiplayerUI/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="CopyIPButton" type="Button" parent="MultiplayerUI/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Copy Host IP"
+
+[node name="JoinButton" type="Button" parent="MultiplayerUI/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="MultiplayerUI/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter an IP"
+alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player.tscn", "res://pistol.tscn")

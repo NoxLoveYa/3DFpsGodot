@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player.gd" id="1_k87vv"]
 [ext_resource type="PackedScene" uid="uid://mvu16iyil8vx" path="res://Camera.tscn" id="2_0foyo"]
-[ext_resource type="PackedScene" uid="uid://2r45ad615jux" path="res://pistol.tscn" id="3_5mkm0"]
+[ext_resource type="PackedScene" uid="uid://dmlw5tgwu8ca2" path="res://sniper.tscn" id="3_lk1d1"]
 [ext_resource type="PackedScene" uid="uid://dg6ippotwx2ee" path="res://HealthComponent.tscn" id="5_552k1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1pv6"]
@@ -45,15 +45,15 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.564, -0.35)
 current = false
 
-[node name="Pistol" parent="Camera" instance=ExtResource("3_5mkm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523728, -0.176179, -0.676883)
-damage = 25.0
-
 [node name="RayCast3D" type="RayCast3D" parent="Camera"]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -500, 0)
 collision_mask = 6
 debug_shape_custom_color = Color(0.945098, 0.560784, 1, 1)
+
+[node name="Pistol" parent="Camera" instance=ExtResource("3_lk1d1")]
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0.372275, -0.39068, -0.957444)
+damage = 100.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ym8mb")
