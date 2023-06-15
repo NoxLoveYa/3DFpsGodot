@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmlw5tgwu8ca2"]
+[gd_scene load_steps=22 format=3 uid="uid://dmlw5tgwu8ca2"]
 
 [ext_resource type="Script" path="res://sniper.gd" id="1_nk8y6"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_i4wjo"]
 
 [sub_resource type="Animation" id="Animation_ecnvu"]
 length = 0.001
@@ -128,38 +129,78 @@ _data = {
 "scope": SubResource("Animation_bos81")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t21yl"]
+render_priority = 0
+shader = ExtResource("2_i4wjo")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.0352941, 0.141176, 0.141176, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddqm4"]
 resource_name = "Green"
+next_pass = SubResource("ShaderMaterial_t21yl")
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.337409, 0.366653, 0.31752, 1)
 roughness = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02gmo"]
+render_priority = 0
+shader = ExtResource("2_i4wjo")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.0862745, 0.101961, 0.109804, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hexf"]
 resource_name = "Black"
+next_pass = SubResource("ShaderMaterial_02gmo")
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.179114, 0.180971, 0.186652, 1)
 roughness = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6tie"]
+render_priority = 0
+shader = ExtResource("2_i4wjo")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.0862745, 0.101961, 0.109804, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_saa51"]
 resource_name = "DarkMetal"
+next_pass = SubResource("ShaderMaterial_p6tie")
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.240094, 0.239986, 0.236899, 1)
 roughness = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5ft3"]
+render_priority = 0
+shader = ExtResource("2_i4wjo")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.0862745, 0.101961, 0.109804, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0wvi"]
 resource_local_to_scene = true
 resource_name = "Glass"
+next_pass = SubResource("ShaderMaterial_v5ft3")
 albedo_color = Color(0, 0.141176, 0.207843, 1)
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
 heightmap_max_layers = 32
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0d7ct"]
+render_priority = 0
+shader = ExtResource("2_i4wjo")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.0431373, 0.0745098, 0.0941176, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2c82"]
 resource_local_to_scene = true
 resource_name = "Grey"
+next_pass = SubResource("ShaderMaterial_0d7ct")
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.224109, 0.227179, 0.233319, 1)
