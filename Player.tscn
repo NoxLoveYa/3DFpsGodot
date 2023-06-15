@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3nr4faouxsdw"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_k87vv"]
+[ext_resource type="PackedScene" uid="uid://mvu16iyil8vx" path="res://Camera.tscn" id="2_0foyo"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_01yld"]
+[ext_resource type="PackedScene" uid="uid://2r45ad615jux" path="res://pistol.tscn" id="3_5mkm0"]
+[ext_resource type="PackedScene" uid="uid://dg6ippotwx2ee" path="res://HealthComponent.tscn" id="5_552k1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1pv6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u1p8"]
+render_priority = 0
+shader = ExtResource("2_01yld")
+shader_parameter/enabled = true
+shader_parameter/size = 2.5
+shader_parameter/outline_color = Color(0.721569, 0.572549, 0.713726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cke2e"]
+next_pass = SubResource("ShaderMaterial_6u1p8")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.737255, 0.458824, 0.34902, 1)
+emission = Color(0.745098, 0.447059, 0.298039, 1)
+rim_enabled = true
+rim = 0.78
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kqj0l"]
+material = SubResource("StandardMaterial3D_cke2e")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ym8mb"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Camera:rotation")
+properties/2/spawn = true
+properties/2/sync = true
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_k87vv")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_g1pv6")
+
+[node name="Renderer" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_kqj0l")
+skeleton = NodePath("../..")
+
+[node name="Camera" parent="." instance=ExtResource("2_0foyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585312, -0.653553)
+current = false
+
+[node name="Pistol" parent="Camera" instance=ExtResource("3_5mkm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523728, -0.176179, -0.676883)
+damage = 25.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -200, 0)
+collision_mask = 6
+debug_shape_custom_color = Color(0.945098, 0.560784, 1, 1)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ym8mb")
+
+[node name="Health" parent="." instance=ExtResource("5_552k1")]

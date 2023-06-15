@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://mvu16iyil8vx"]
+
+[node name="Camera3D" type="Camera3D"]
+current = true
